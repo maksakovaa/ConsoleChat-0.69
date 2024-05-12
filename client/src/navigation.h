@@ -8,6 +8,7 @@ public:
     void menuAuth();
     void menuAbout();
     void menuAuthorized();
+    void menuUserList();
     void menuAllMsg();
     void menuPerMsg();
     void menuAdmin();

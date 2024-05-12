@@ -15,6 +15,7 @@ string getOsName();
 int getProcId();
 string middle(const string& str);
 void printHeader(const string& header);
+void printBorder();
 void cp1251toUtf8(string& str);
 string curDateTime();
 string logTimeStamp();

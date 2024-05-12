@@ -10,12 +10,13 @@ void Chat::menuMain()
 	consoleClear();
 	printHeader("[Главное меню]");
 	cout << "Добро пожаловать в консольный чат!\nДля просмотра и отправки сообщений необходимо войти или зарегистрироваться. " << endl;
-	cout << "Выберите действие:\n [1] - Регистрация пользователя \n [2] - Авторизация \n [3] - О программе \n [Q] - Выход из программы" << endl;
+	cout << "Выберите действие:\n [1] - Регистрация пользователя \n [2] - Список пользователей\n [3] - Авторизация \n [4] - О программе \n [Q] - Выход из программы" << endl;
 	cin >> m_choice;
-	checkInput('1', '3', 'Q', 'q');
+	checkInput('1', '4', 'Q', 'q');
 	if (m_choice == '1') { menuRegUser(); }
-	else if (m_choice == '2') { menuAuth(); }
-	else if (m_choice == '3') { menuAbout(); }
+	else if (m_choice == '2') { menuUserList(); }
+	else if (m_choice == '3') { menuAuth(); }
+	else if (m_choice == '4') { menuAbout(); }
 	else if (m_choice == 'q' || m_choice == 'Q') { exit(); }
 }
 
@@ -145,6 +146,20 @@ void Chat::menuAuthorized()
 	else if (m_choice == 'q' || m_choice == 'Q') { exit(); }
 }
 
+void Chat::menuUserList()
+{
+	consoleClear();
+	printHeader("[Список пользователей]");
+	UserBase->printUsrBase();
+	printBorder();
+	cout << " [1] - вернуться в главное меню\n [2] - Войти\n [Q] - выход из программы\n";
+	cin >> m_choice;
+	checkInput('1', '2', 'q', 'Q');
+	if (m_choice == '1') { menuMain(); }
+	else if (m_choice == '2') { menuAuth(); }
+	else if (m_choice == 'q' || m_choice == 'Q') { exit(); }
+}
+
 void Chat::menuAllMsg()
 {
 	while (true)
@@ -180,6 +195,7 @@ void Chat::menuPerMsg()
 	consoleClear();
 	printHeader("[Список пользователей]");
 	printUserBase();
+	printBorder();
 	cout << " [1] - вернуться в главное меню\n [2] - Просмотр сообщений\n [Q] - выход из программы\n";
 	cin >> m_choice;
 	checkInput('1', '2', 'q', 'Q');

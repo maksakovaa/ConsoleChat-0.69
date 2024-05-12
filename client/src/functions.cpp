@@ -150,8 +150,13 @@ string middle(const string& str)
 
 void printHeader(const string& header)
 {
-	string border(80, '-');
 	cout << middle(header) << endl;
+	printBorder();
+}
+
+void printBorder()
+{
+	string border(80, '-');
 	cout << border << endl;
 }
 
