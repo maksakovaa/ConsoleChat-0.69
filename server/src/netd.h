@@ -15,7 +15,6 @@ public:
 	~Net();
 	void getConfig();
 #if defined (_WIN32) || defined (_WIN64)
-	void convertIp();
 	void initWinsock();
 	void disconnect();
 #endif
@@ -39,7 +38,7 @@ public:
 	void setAMStatus();
 private:
 	void logging(const string& entry);
-	string server_ip, chat_port, delim{"<|>"};
+	string chat_port, delim{"<|>"};
 	static const int pkg_length = 1024;
 	char package[pkg_length];
 	string pkg_out;

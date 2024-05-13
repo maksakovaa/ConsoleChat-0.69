@@ -4,7 +4,6 @@ Net::Net()
 {
 	getConfig();
 #if defined (_WIN32) || defined (_WIN64)
-	convertIp();
 	initWinsock();
 #endif
 	createSocket();
@@ -22,22 +21,10 @@ Net::~Net()
 
 void Net::getConfig()
 {
-	server_ip = Config->get("server_ip");
 	chat_port = Config->get("chat_port");
 }
 
 #if defined (_WIN32) || defined (_WIN64)
-
-void Net::convertIp()
-{
-	erStat = inet_pton(AF_INET, server_ip.data(), &ip_to_num);
-
-	if (erStat <= 0)
-	{
-		logging("[NET] ERROR: Ошибка преобразования IP адреса в специальный цифровой формат.");
-		exit(1);
-	}
-}
 
 void Net::initWinsock()
 {
@@ -96,7 +83,7 @@ void Net::bindSocket()
 	ZeroMemory(&servInfo, sizeof(servInfo));
 
 	servInfo.sin_family = AF_INET;
-	servInfo.sin_addr = ip_to_num;
+	servInfo.sin_addr.s_addr = htonl(INADDR_ANY);
 	servInfo.sin_port = htons(stoi(chat_port));
 
 	erStat = bind(ServSock, (sockaddr*)&servInfo, sizeof(servInfo));
