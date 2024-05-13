@@ -46,4 +46,3 @@ public:
     bool getCurAuth();
     void logOut();
 };
-
