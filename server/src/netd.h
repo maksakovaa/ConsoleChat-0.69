@@ -31,8 +31,6 @@ public:
 	void cutRequestHeader(string& request);
 	void sendUsrBase();
 	void sendMsgBase(const string& baseType);
-	void sendPerMsgBase();
-	void sendAllMsgBase();
 	void regUser();
 	void regMSG();
 	void delUsr();

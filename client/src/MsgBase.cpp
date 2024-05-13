@@ -104,13 +104,16 @@ void MsgBase::printMsgComp(vector<int>& msgComp)
 			printMsgStruct(base->at(msgComp[i]));
 			if (base->at(msgComp[i]).get_mstatus() == 0 && base->at(msgComp[i]).get_mto() == "ALL")
 			{
-				string packet = tagStructParam(m_Attr::indId, std::to_string(base->at(msgComp[i]).get_mid())) + tagStructParam(m_Attr::indFor, UserBase->getCurUUID()) + tagStructParam(m_Attr::indStatus, "1");
+				string packet = tagStructParam(m_Attr::indId, std::to_string(base->at(msgComp[i]).get_mid()));
+				packet += tagStructParam(m_Attr::indFor, UserBase->getCurUUID());
+				packet += tagStructParam(m_Attr::indStatus, "1");
 				Online->setAllMsgStatus(packet);
 				base->at(msgComp[i]).set_read();
 			}
 			if (base->at(msgComp[i]).get_mstatus() == 0 && base->at(msgComp[i]).get_mto() == UserBase->getCurUUID())
 			{
-				string packet = tagStructParam(m_Attr::indId, std::to_string(base->at(msgComp[i]).get_mid())) + tagStructParam(m_Attr::indStatus, "1");
+				string packet = tagStructParam(m_Attr::indId, std::to_string(base->at(msgComp[i]).get_mid()));
+				packet += tagStructParam(m_Attr::indStatus, "1");
 				Online->setPerMsgStatus(packet);
 				base->at(msgComp[i]).set_read();
 			}
@@ -121,8 +124,6 @@ void MsgBase::printMsgComp(vector<int>& msgComp)
 void MsgBase::printMsgStruct(Message& mesg)
 {
 	string border(80, '-');
-	size_t count = 80 - mesg.get_mfrom().length() - mesg.get_mdate().length() -2;
-
 	cout << "[" << mesg.get_mdate() << " | " << UserBase->getUsrName(mesg.get_mfrom()) << "]\n\n" << mesg.get_mtext() << "\n" << border << endl;
 }
 
